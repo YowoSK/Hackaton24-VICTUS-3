@@ -16,7 +16,7 @@ def extract_text_from_pdf(file_path):
     return text
 
 
-def validate_with_openai(target_text, standard_text, corrections):
+def validate_with_openai(target_text, template_text, corrections):
     try:
         openai_api_key = os.getenv("OPENAI_API_KEY")
         client = OpenAI(api_key=openai_api_key)
@@ -31,7 +31,7 @@ def validate_with_openai(target_text, standard_text, corrections):
             You are given two documents:
             
             Standard document:
-            {standard_text}
+            {template_text}
             
             Target document:
             {target_text}
@@ -58,7 +58,7 @@ def validate_with_openai(target_text, standard_text, corrections):
         return None
 
 
-def generate_autofill_suggestions(standard_text, target_text):
+def generate_autofill_suggestions(template_text, target_text):
     try:
         openai_api_key = os.getenv("OPENAI_API_KEY")
         client = OpenAI(api_key=openai_api_key)
@@ -67,7 +67,7 @@ def generate_autofill_suggestions(standard_text, target_text):
             If the target document has incomplete sections compared to the standard document. Based on the content of the standard document, provide autofill suggestions to complete the missing parts in the target document.
 
             Standard Document:
-            {standard_text}
+            {template_text}
 
             Target Document:
             {target_text}
@@ -109,19 +109,19 @@ def human_review():
     return validation_status, corrections
 
 def main():
-    standard_pdf_path = r"C:\Users\brank\Downloads\Official.pdf"
-    target_pdf_path = r"C:\Users\brank\Downloads\2024_Hackathon_LLM DATA Validator.pdf"
+    template_pdf_path = ""
+    target_pdf_path = ""
 
-    standard_text = extract_text_from_pdf(standard_pdf_path)
+    template_text = extract_text_from_pdf(template_pdf_path)
     target_text = extract_text_from_pdf(target_pdf_path)
 
     corrections = None
     while True:
-        ai_results = validate_with_openai(target_text, standard_text, corrections)
+        ai_results = validate_with_openai(target_text, template_text, corrections)
         print("\nAI Validation Results:")
         print(ai_results)
 
-        autofill_suggestions = generate_autofill_suggestions(standard_text, target_text)
+        autofill_suggestions = generate_autofill_suggestions(template_text, target_text)
         print("\nAutofill Suggestions:")
         print(autofill_suggestions)
 

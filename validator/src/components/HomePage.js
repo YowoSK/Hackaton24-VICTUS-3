@@ -8,6 +8,7 @@ const HomePage = () => {
     const [result, setResult] = useState('');
     const [error, setError] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleTemplateFileChange = (event) => {
         setTemplateFile(event.target.files[0]);
@@ -21,7 +22,7 @@ const HomePage = () => {
         setPrompt(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!templateFile) {
             setError('Please upload the template document.');
         } else if (!filledFile) {
@@ -31,6 +32,35 @@ const HomePage = () => {
             const simulatedFlaws = `Template Document: ${templateFile.name}\nFilled Document: ${filledFile.name}\nFlaws: Missing title, Incorrect date format, Inconsistent terminology.`;
             setResult(simulatedFlaws);
             setError('');
+        }
+
+        try {
+            setIsLoading(true);
+            setError('');
+
+            const formData = new FormData();
+            formData.append('templateFile', templateFile);
+            formData.append('filledFile', filledFile);
+            if (prompt) {
+                formData.append('prompt', prompt);
+            }
+
+            const response = await fetch('http://localhost:3001/api/validate', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to process files');
+            }
+
+            const data = await response.json();
+            setResult(data.validation_results);
+
+        } catch (err) {
+            setError(err.message || 'Error processing files');
+        } finally {
+            setIsLoading(false);
         }
     };
 
