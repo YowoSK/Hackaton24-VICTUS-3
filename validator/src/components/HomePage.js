@@ -25,9 +25,7 @@ const HomePage = () => {
     };
 
     const handleReset = () => {
-        setFile(null);
         setPrompt('');
-        setResult('');
     };
 
     return (
@@ -47,8 +45,8 @@ const HomePage = () => {
                 rows={10}
                 onChange={handlePromptChange}
             />
-            <button className="btn mt-3 btn-primary" onClick={handleSubmit}>Submit</button>
-            <button className="btn mt-3 btn-outline-primary" onClick={handleReset}>Reset</button>
+            <button className="btn mt-3 btn-primary me-2" onClick={handleSubmit}>Submit</button>
+            <button className="btn mt-3 btn-outline-primary" onClick={handleReset}>Reset prompt</button>
             {result && (
                 <div className="mt-3">
                     <h2>Results:</h2>
