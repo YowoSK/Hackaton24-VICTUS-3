@@ -22,28 +22,28 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="fileUpload">Upload File:</label>
-          <input
-            type="file"
-            id="fileUpload"
-            onChange={handleFileChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="promptInput">Enter Prompt:</label>
-          <input
-            type="text"
-            id="promptInput"
-            value={prompt}
-            onChange={handlePromptChange}
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="fileUpload">Upload File:</label>
+            <input
+                type="file"
+                id="fileUpload"
+                onChange={handleFileChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="promptInput">Enter Prompt:</label>
+            <input
+                type="text"
+                id="promptInput"
+                value={prompt}
+                onChange={handlePromptChange}
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
   );
 };
 
