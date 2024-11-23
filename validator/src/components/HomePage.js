@@ -25,15 +25,17 @@ const HomePage = () => {
                     className="form-control me-2"
                     onChange={(e) => setFile(e.target.files[0])}
                 />
-                <input
-                    type="text"
-                    className="form-control me-2"
-                    placeholder="Enter your prompt"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                />
-                <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+
             </div>
+            <textarea
+                className="form-control me-2"
+                placeholder="Enter your prompt"
+                value={prompt}
+                rows={10}
+                onChange={(e) => setPrompt(e.target.value)}
+            />
+            <button className="btn m-3 btn-primary" onClick={handleSubmit}>Submit</button>
+            {/*<button className="btn m-3 btn-outline-primary" onClick={handleSubmit}>Reset</button>*/}
             {result && (
                 <div className="mt-3">
                     <h2>Results:</h2>
