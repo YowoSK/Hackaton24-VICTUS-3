@@ -28,9 +28,6 @@ const HomePage = () => {
         } else if (!filledFile) {
             setError('Please upload the filled document.');
         } else {
-            // Simulate document validation and set result
-            const simulatedFlaws = `Template Document: ${templateFile.name}\nFilled Document: ${filledFile.name}\nFlaws: Missing title, Incorrect date format, Inconsistent terminology.`;
-            setResult(simulatedFlaws);
             setError('');
         }
 
@@ -114,7 +111,14 @@ const HomePage = () => {
             )}
             <button className="btn mt-3 btn-primary me-2" onClick={handleSubmit}>Submit</button>
             <button className="btn mt-3 btn-outline-secondary" onClick={handleReset}>Clear prompt</button>
-            {result && (
+            {isLoading && (
+                <div className="d-flex justify-content-center mt-3">
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            )}
+            {!isLoading && result && (
                 <div className="mt-3">
                     <h2>Results:</h2>
                     <pre>{result}</pre>
