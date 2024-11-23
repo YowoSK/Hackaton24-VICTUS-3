@@ -121,7 +121,11 @@ const HomePage = () => {
             {!isLoading && result && (
                 <div className="mt-3">
                     <h2>Results:</h2>
-                    <pre>{result}</pre>
+                    <div className="card">
+                        <div className="card-body">
+                            <pre>{result}</pre>
+                        </div>
+                    </div>
                 </div>
             )}
 
