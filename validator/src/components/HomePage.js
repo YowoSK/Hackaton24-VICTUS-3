@@ -7,6 +7,7 @@ const HomePage = () => {
     const [prompt, setPrompt] = useState('');
     const [result, setResult] = useState('');
     const [error, setError] = useState('');
+    const [showModal, setShowModal] = useState(false);
 
     const handleTemplateFileChange = (event) => {
         setTemplateFile(event.target.files[0]);
@@ -34,8 +35,15 @@ const HomePage = () => {
     };
 
     const handleReset = () => {
+        if (prompt) {
+            setShowModal(true);
+        }
+    };
+
+    const confirmReset = () => {
         setPrompt('');
         setError('');
+        setShowModal(false);
     };
 
     return (
@@ -70,10 +78,10 @@ const HomePage = () => {
                 aria-label="Enter your prompt"
             />
             {error && (
-            <div className="alert alert-danger mt-3" role="alert">
-                {error}
-            </div>
-        )}
+                <div className="alert alert-danger mt-3" role="alert">
+                    {error}
+                </div>
+            )}
             <button className="btn mt-3 btn-primary me-2" onClick={handleSubmit}>Submit</button>
             <button className="btn mt-3 btn-outline-primary" onClick={handleReset}>Reset prompt</button>
             {result && (
@@ -82,6 +90,24 @@ const HomePage = () => {
                     <pre>{result}</pre>
                 </div>
             )}
+
+            {/* Bootstrap Modal */}
+            <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Reset the prompt?</h5>
+                            <button type="button" className="close" onClick={() => setShowModal(false)} aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-footer d-flex justify-content-start">
+                            <button type="button" className="btn btn-primary" onClick={confirmReset}>Reset</button>
+                            <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
