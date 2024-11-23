@@ -78,7 +78,7 @@ const HomePage = () => {
 
     return (
         <div className="container mt-5">
-            <h1 className="text-center mb-4">AI Data Validator</h1>
+            <h1 className="text-center mb-4">Victus - Validator</h1>
             <div className="mb-3">
                 <label htmlFor="templateFile" className="form-label">Upload Template Document: <b>*</b></label>
                 <input
@@ -101,11 +101,11 @@ const HomePage = () => {
             </div>
             <textarea
                 className="form-control mb-3"
-                placeholder="Enter your prompt"
+                placeholder="Enter your additional prompt"
                 value={prompt}
-                rows={10}
+                rows={4}
                 onChange={handlePromptChange}
-                aria-label="Enter your prompt"
+                aria-label="Enter your additional prompt"
             />
             {error && (
                 <div className="alert alert-danger mt-3" role="alert">
@@ -113,7 +113,7 @@ const HomePage = () => {
                 </div>
             )}
             <button className="btn mt-3 btn-primary me-2" onClick={handleSubmit}>Submit</button>
-            <button className="btn mt-3 btn-outline-primary" onClick={handleReset}>Reset prompt</button>
+            <button className="btn mt-3 btn-outline-secondary" onClick={handleReset}>Clear prompt</button>
             {result && (
                 <div className="mt-3">
                     <h2>Results:</h2>
@@ -126,13 +126,13 @@ const HomePage = () => {
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Reset the prompt?</h5>
+                            <h5 className="modal-title">Clear the prompt field?</h5>
                             <button type="button" className="close" onClick={() => setShowModal(false)} aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-footer d-flex justify-content-start">
-                            <button type="button" className="btn btn-primary" onClick={confirmReset}>Reset</button>
+                            <button type="button" className="btn btn-primary" onClick={confirmReset}>Clear</button>
                             <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
                         </div>
                     </div>
