@@ -27,17 +27,19 @@ def validate_with_openai(text, standards):
             Document content:
             {text}
             """
+
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt},
             ],
-            #max_tokens=500,
+            temperature=0
         )
+        response_dict = response.model_dump()
+        response_message = response_dict["choices"][0]["message"]["content"]
 
-
-        return response['choices'][0]['text']
+        return response_message
     except Exception as e:
         print(f"Error with OpenAI validation: {e}")
         return None
