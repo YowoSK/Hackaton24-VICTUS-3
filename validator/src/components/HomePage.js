@@ -115,7 +115,7 @@ const HomePage = () => {
                 </div>
             )}
             <button className="btn mt-3 btn-primary me-2" onClick={handleSubmit} aria-label="Submit">Submit</button>
-            <button className="btn mt-3 btn-outline-secondary" onClick={handleReset} aria-label="Clear prompt">Clear prompt</button>
+            <button className="btn mt-3 btn-outline-secondary" onClick={handleReset} aria-label="Clear additional prompt">Clear additional prompt</button>
             {isLoading && (
                 <div className="d-flex justify-content-center mt-3" aria-hidden="true">
                     <div className="spinner-border" role="status">
