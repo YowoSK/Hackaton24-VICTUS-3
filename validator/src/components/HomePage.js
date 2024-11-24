@@ -87,6 +87,7 @@ const HomePage = () => {
                     className="form-control"
                     onChange={handleTemplateFileChange}
                     aria-label="Upload Template Document"
+                    aria-describedby="templateFileHelp"
                 />
             </div>
             <div className="mb-3">
@@ -97,6 +98,7 @@ const HomePage = () => {
                     className="form-control"
                     onChange={handleFilledFileChange}
                     aria-label="Upload Filled Document"
+                    aria-describedby="filledFileHelp"
                 />
             </div>
             <textarea
@@ -112,17 +114,17 @@ const HomePage = () => {
                     {error}
                 </div>
             )}
-            <button className="btn mt-3 btn-primary me-2" onClick={handleSubmit}>Submit</button>
-            <button className="btn mt-3 btn-outline-secondary" onClick={handleReset}>Clear prompt</button>
+            <button className="btn mt-3 btn-primary me-2" onClick={handleSubmit} aria-label="Submit">Submit</button>
+            <button className="btn mt-3 btn-outline-secondary" onClick={handleReset} aria-label="Clear prompt">Clear prompt</button>
             {isLoading && (
-                <div className="d-flex justify-content-center mt-3">
+                <div className="d-flex justify-content-center mt-3" aria-hidden="true">
                     <div className="spinner-border" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
                 </div>
             )}
             {!isLoading && result && (
-                <div className="mt-3 mb-3">
+                <div className="mt-3 mb-3" aria-live="polite">
                     <h2>Results:</h2>
                     <div className="card">
                         <div className="card-body">
@@ -133,18 +135,18 @@ const HomePage = () => {
             )}
 
             {/* Bootstrap Modal */}
-            <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1" role="dialog">
+            <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }} tabIndex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden={!showModal}>
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Clear the prompt field?</h5>
+                            <h5 className="modal-title" id="modalTitle">Clear the prompt field?</h5>
                             <button type="button" className="close" onClick={() => setShowModal(false)} aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-footer d-flex justify-content-start">
-                            <button type="button" className="btn btn-primary" onClick={confirmReset}>Clear</button>
-                            <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
+                            <button type="button" className="btn btn-primary" onClick={confirmReset} aria-label="Clear">Clear</button>
+                            <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)} aria-label="Cancel">Cancel</button>
                         </div>
                     </div>
                 </div>
