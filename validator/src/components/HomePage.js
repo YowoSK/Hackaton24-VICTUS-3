@@ -52,7 +52,10 @@ const HomePage = () => {
             }
 
             const data = await response.json();
-            setResult(data.validation_results);
+            setResult(
+            `Validation Results:\n${data.validation_results}\n\n` +
+            `Autofill Suggestions:\n${data.autofill_suggestions}`
+            );
 
         } catch (err) {
             setError(err.message || 'Error processing files');
